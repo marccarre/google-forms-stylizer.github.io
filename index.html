@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Google Forms Stylizer</title>
+    <meta name="description" content="Stylizer for Google Forms: bare HTML, Bootstrap, etc." />
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha256-gJ9rCvTS5xodBImuaUYf1WfbdDKq54HCPz9wk8spvGs= sha512-weqt+X3kGDDAW9V32W7bWc6aSNCMGNQsdOpfJJz/qD/Yhp+kNeR+YyvvWojJ+afETB31L0C4eO0pcygxfTgjgw==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/layout.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Google Forms Stylizer</a>
+        </div><!--/.navbar-header -->
+        <div class="navbar-collapse collapse navbar-right">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="https://github.com/marccarre/google-forms-stylizer.github.io">GitHub</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    <!-- Content -->
+    <div class="container">      
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <input type="text" class="form-control" id="input-google-form-url" placeholder="Enter the URL of your Google Form here, i.e.: https://docs.google.com/forms/d/<some unique ID>/viewform">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#original" aria-controls="original" role="tab" data-toggle="tab">Original</a></li>
+            <li role="presentation"><a href="#raw" aria-controls="raw" role="tab" data-toggle="tab">Raw HTML</a></li>
+            <li role="presentation"><a href="#bootstrap" aria-controls="bootstrap" role="tab" data-toggle="tab">Bootstrap 3</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="original">
+              <!-- Accordion for "Original" section -->
+              <div class="panel-group" id="accordion-original" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-original-output">
+                    <div class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#collapse-original-output" aria-expanded="true" aria-controls="collapse-original-output">Output</a>
+                    </div>
+                  </div>
+                  <div id="collapse-original-output" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-original-output">
+                    <div class="panel-body">
+                      <iframe id="original-output" width="100%" height="350px" frameborder="0"></iframe>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-original-sources">
+                    <div class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-original-sources" aria-expanded="true" aria-controls="collapse-original-sources">Sources</a>
+                    </div>
+                  </div>
+                  <div id="collapse-original-sources" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-original-sources">
+                    <div class="panel-body">
+                      <pre id="original-sources" class="pre-scrollable"></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="raw">
+              <!-- Accordion for "Raw" section -->
+              <div class="panel-group" id="accordion-raw" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-raw-output">
+                    <div class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#collapse-raw-output" aria-expanded="true" aria-controls="collapse-raw-output">Output</a>
+                    </div>
+                  </div>
+                  <div id="collapse-raw-output" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-raw-output">
+                    <div class="panel-body">
+                      <div id="raw-output"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-raw-sources">
+                    <div class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-raw-sources" aria-expanded="true" aria-controls="collapse-raw-sources">Sources</a>
+                    </div>
+                  </div>
+                  <div id="collapse-raw-sources" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-raw-sources">
+                    <div class="panel-body">
+                      <pre id="raw-sources" class="pre-scrollable"></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="bootstrap">
+              <!-- Accordion for "Bootstrap" section -->
+              <div class="panel-group" id="accordion-bootstrap" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-bootstrap-output">
+                    <div class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#collapse-bootstrap-output" aria-expanded="true" aria-controls="collapse-bootstrap-output">Output</a>
+                    </div>
+                  </div>
+                  <div id="collapse-bootstrap-output" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-bootstrap-output">
+                    <div class="panel-body">
+                      <div id="bootstrap-output"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading-bootstrap-sources">
+                    <div class="panel-title">
+                      <a class="collapsed" role="button" data-toggle="collapse" href="#collapse-bootstrap-sources" aria-expanded="true" aria-controls="collapse-bootstrap-sources">Sources</a>
+                    </div>
+                  </div>
+                  <div id="collapse-bootstrap-sources" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading-bootstrap-sources">
+                    <div class="panel-body">
+                      <pre id="bootstrap-sources" class="pre-scrollable"></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p class="text-center">Copyright &copy; 2015 - Marc Carr&eacute;
+      </div>
+    </footer>
+    <!-- Javascript -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M<6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/ui.js"></script>
+  </body>
+</html>

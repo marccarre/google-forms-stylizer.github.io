@@ -4,11 +4,8 @@
   "description": "Stylizer for Google Forms: raw HTML, Bootstrap 3, etc.",
   "main": "js/main.js",
   "dependencies": {
-    "requirejs": "2.1.22"
   },
   "devDependencies": {
-    "jasmine": "2.3.2",
-    "istanbul": "0.4.1",
     "jshint": "2.8.0",
     "jslint": "0.9.5"
   },
@@ -16,7 +13,7 @@
     "node": "5.1.0"
   },
   "scripts": {
-    "test": "istanbul cover jasmine"
+    "lint": "jshint js/app/*.js spec/*.js && jslint js/app/*.js spec/*.js"
   },
   "repository": {
     "type": "git",

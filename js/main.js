@@ -8,6 +8,7 @@ require.config({
         'beautify-html': 'lib/beautify-v1.5.10/beautify-html',
         'ui':            'app/ui',
         'model':         'app/model',
+        'utilities':     'app/utilities',
         'view':          'app/view'
     },
     shim: {

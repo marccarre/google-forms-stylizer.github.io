@@ -1,4 +1,4 @@
-/*global modume, define, describe, it, expect*/
+/*global define, describe, it, expect*/
 define(['ui'], function (ui) {
     'use strict';
 

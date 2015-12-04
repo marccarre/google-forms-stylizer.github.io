@@ -45,7 +45,7 @@
     <!-- Content -->
     <div class="container">      
       <div class="row">
-        <div id="main-content" class="col-md-12">
+        <div id="jasmine-container" class="col-md-12">
         </div>
       </div>
     </div>
@@ -89,12 +89,6 @@
 
         require(['boot'], function () {
             require(specs, function () {
-                require(['jquery'], function ($) {
-                    $(function () {
-                        // Move Jasmine HTML reporter to Bootstrap grid:
-                        $('#main-content').append($('.jasmine_html-reporter'));
-                    });
-                });
                 window.onload();
             });
         });

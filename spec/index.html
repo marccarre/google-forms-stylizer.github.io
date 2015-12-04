@@ -8,7 +8,7 @@
     <meta name="description" content="Stylizer for Google Forms: bare HTML, Bootstrap, etc." />
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css" rel="stylesheet" integrity="sha256-gJ9rCvTS5xodBImuaUYf1WfbdDKq54HCPz9wk8spvGs= sha512-weqt+X3kGDDAW9V32W7bWc6aSNCMGNQsdOpfJJz/qD/Yhp+kNeR+YyvvWojJ+afETB31L0C4eO0pcygxfTgjgw==" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/layout.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.min.css">
+    <link rel="stylesheet" href="lib/jasmine-v2.3.4/jasmine.css">
     <style>
       .jasmine_html-reporter { 
         background-color: #fff;
@@ -62,9 +62,9 @@
     <script type="text/javascript">
         require.config({
             paths: {
-                'jasmine':        'https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine.min',
-                'jasmine-html':   'https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/jasmine-html.min',
-                'boot':           'https://cdnjs.cloudflare.com/ajax/libs/jasmine/2.3.4/boot.min',
+                'jasmine':        '../spec/lib/jasmine-v2.3.4/jasmine',
+                'jasmine-html':   '../spec/lib/jasmine-v2.3.4/jasmine-html',
+                'boot':           '../spec/lib/jasmine-v2.3.4/boot',
                 'jasmine-jquery': '../spec/lib/jasmine-jquery-v2.1.1',
                 'spec':           '../spec'
             },

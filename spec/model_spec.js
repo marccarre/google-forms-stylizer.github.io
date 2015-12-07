@@ -347,6 +347,329 @@ define(['model'], function (HtmlSources) {
             });
         });
 
+        describe('The extractBootstrap3Html method', function () {
+            var htmlSources = new HtmlSources();
+
+            it('should, for <input type="text">, extract and format the title, the help text, and the input tag', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-form-question errorbox-good" role="listitem">' +
+                    '            <div dir="auto" class="ss-item ss-item-required ss-text">' +
+                    '                <div class="ss-form-entry">' +
+                    '                    <label class="ss-q-item-label" for="entry_1244196359">' +
+                    '                        <div class="ss-q-title">Enter text' +
+                    '                            <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>' +
+                    '                            <span class="ss-required-asterisk" aria-hidden="true">*</span></div>' +
+                    '                        <div class="ss-q-help ss-secondary-text" dir="auto">A short text...</div>' +
+                    '                    </label>' +
+                    '                    <input type="text" name="entry.1244196359" value="" class="ss-q-short" id="entry_1244196359" dir="auto" aria-label="Enter text A short text... " aria-required="true" required="" title="">' +
+                    '                    <div class="error-message" id="1141750391_errorMessage"></div>' +
+                    '                    <div class="required-message">This is a required question</div>' +
+                    '                </div>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div class="form-group">\n' + 
+                    '        <label id="label-for-entry_1244196359" for="entry_1244196359"><span class="form-title">Enter text</span><span class="form-required" aria-hidden="true">*</span></label>\n' +
+                    '        <div id="help-for-entry_1244196359" class="help-block">A short text...</div>\n' + 
+                    '        <input aria-describedby="help-for-entry_1244196359" aria-labelledby="label-for-entry_1244196359" class="form-control" name="entry.1244196359" id="entry_1244196359" aria-label="Enter text A short text... " aria-required="true"\n' + 
+                    '        required="" type="text">\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for <textarea>, extract and format the title, the help text, and the textarea tag', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-form-question errorbox-good" role="listitem">' + 
+                    '            <div dir="auto" class="ss-item  ss-paragraph-text">' + 
+                    '                <div class="ss-form-entry">' + 
+                    '                    <label class="ss-q-item-label" for="entry_251102827">' + 
+                    '                        <div class="ss-q-title">Enter comments' + 
+                    '                        </div>' + 
+                    '                        <div class="ss-q-help ss-secondary-text" dir="auto">A long paragraph...</div>' + 
+                    '                    </label>' + 
+                    '                    <textarea name="entry.251102827" rows="8" cols="0" class="ss-q-long" id="entry_251102827" dir="auto" aria-label="Enter comments A long paragraph... "></textarea>' + 
+                    '                    <div class="error-message" id="1819944731_errorMessage"></div>' + 
+                    '                    <div class="required-message">This is a required question</div>' + 
+                    '                </div>' + 
+                    '            </div>' + 
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div class="form-group">\n' + 
+                    '        <label id="label-for-entry_251102827" for="entry_251102827"><span class="form-title">Enter comments</span></label>\n' +
+                    '        <div id="help-for-entry_251102827" class="help-block">A long paragraph...</div>\n' + 
+                    '        <textarea aria-describedby="help-for-entry_251102827" aria-labelledby="label-for-entry_251102827" class="form-control" name="entry.251102827" rows="8" cols="0" id="entry_251102827" aria-label="Enter comments A long paragraph... "></textarea>\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for <input type="radio">, extract and format the title, the help text, and the input tags', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-form-question errorbox-good" role="listitem">' +
+                    '            <div dir="auto" class="ss-item ss-item-required ss-radio">' +
+                    '                <div class="ss-form-entry">' +
+                    '                    <label class="ss-q-item-label" for="entry_1755094973">' +
+                    '                        <div class="ss-q-title">Choose one' +
+                    '                            <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>' +
+                    '                            <span class="ss-required-asterisk" aria-hidden="true">*</span></div>' +
+                    '                        <div class="ss-q-help ss-secondary-text" dir="auto">You take the blue pill: the story ends, you wake up in your bed and believe whatever you want to believe. You take the red pill: you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all' +
+                    '                            I&#39;m offering is the truth. Nothing more.</div>' +
+                    '                    </label>' +
+                    '                    <ul class="ss-choices" role="radiogroup" aria-label="Choose one You take the blue pill: the story ends, you wake up in your bed and believe whatever you want to believe. You take the red pill: you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I&#39;m offering is the truth. Nothing more. ">' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.1189357388" value="Blue pill" id="group_1189357388_1" role="radio" class="ss-q-radio" aria-label="Blue pill" required="" aria-required="true"></span>' +
+                    '                                <span class="ss-choice-label">Blue pill</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="radio" name="entry.1189357388" value="Red pill" id="group_1189357388_2" role="radio" class="ss-q-radio" aria-label="Red pill" required="" aria-required="true"></span>' +
+                    '                                <span class="ss-choice-label">Red pill</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                    </ul>' +
+                    '                    <div class="error-message" id="1755094973_errorMessage"></div>' +
+                    '                    <div class="required-message">This is a required question</div>' +
+                    '                </div>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div role="radiogroup" aria-describedby="help-for-entry_1755094973" aria-labelledby="label-for-entry_1755094973" class="form-group">\n' + 
+                    '        <label id="label-for-entry_1755094973" for="entry_1755094973"><span class="form-title">Choose one</span><span class="form-required" aria-hidden="true">*</span></label>\n' +
+                    '        <div id="help-for-entry_1755094973" class="help-block">You take the blue pill: the story ends, you wake up in your bed and believe whatever you want to believe. You take the red pill: you stay in Wonderland, and I show you how deep the rabbit hole goes. Remember: all I\'m offering is the truth. Nothing\n' +
+                    '            more.</div>\n' + 
+                    '        <div class="radio">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.1189357388" value="Blue pill" id="group_1189357388_1" role="radio" aria-label="Blue pill" required="" aria-required="true" type="radio"><span class="choice-label">Blue pill</span></label>\n' +
+                    '        </div>\n' +
+                    '        <div class="radio">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.1189357388" value="Red pill" id="group_1189357388_2" role="radio" aria-label="Red pill" required="" aria-required="true" type="radio"><span class="choice-label">Red pill</span></label>\n' +
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for <input type="checkbox">, extract and format the title, the help text, and the input tags', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-form-question errorbox-good" role="listitem">' +
+                    '            <div dir="auto" class="ss-item  ss-checkbox">' +
+                    '                <div class="ss-form-entry">' +
+                    '                    <label class="ss-q-item-label" for="entry_96403401">' +
+                    '                        <div class="ss-q-title">Select a few' +
+                    '                        </div>' +
+                    '                        <div class="ss-q-help ss-secondary-text" dir="auto">Multiple possible choices...</div>' +
+                    '                    </label>' +
+                    '                    <ul class="ss-choices" role="group" aria-label="Select a few Multiple possible choices... ">' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="C" id="group_673151654_1" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">C</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="C++" id="group_673151654_2" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">C++</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="Java" id="group_673151654_3" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">Java</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="Scala" id="group_673151654_4" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">Scala</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="Python" id="group_673151654_5" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">Python</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="Ruby" id="group_673151654_6" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">Ruby</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                        <li class="ss-choice-item">' +
+                    '                            <label><span class="ss-choice-item-control goog-inline-block"><input type="checkbox" name="entry.673151654" value="Javascript" id="group_673151654_7" role="checkbox" class="ss-q-checkbox"></span>' +
+                    '                                <span class="ss-choice-label">Javascript</span>' +
+                    '                            </label>' +
+                    '                        </li>' +
+                    '                    </ul>' +
+                    '                    <div class="error-message" id="96403401_errorMessage"></div>' +
+                    '                    <div class="required-message">This is a required question</div>' +
+                    '                </div>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div role="group" aria-describedby="help-for-entry_96403401" aria-labelledby="label-for-entry_96403401" class="form-group">\n' + 
+                    '        <label id="label-for-entry_96403401" for="entry_96403401"><span class="form-title">Select a few</span></label>\n' +
+                    '        <div id="help-for-entry_96403401" class="help-block">Multiple possible choices...</div>\n' + 
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="C" id="group_673151654_1" role="checkbox" type="checkbox"><span class="choice-label">C</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="C++" id="group_673151654_2" role="checkbox" type="checkbox"><span class="choice-label">C++</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="Java" id="group_673151654_3" role="checkbox" type="checkbox"><span class="choice-label">Java</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="Scala" id="group_673151654_4" role="checkbox" type="checkbox"><span class="choice-label">Scala</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="Python" id="group_673151654_5" role="checkbox" type="checkbox"><span class="choice-label">Python</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="Ruby" id="group_673151654_6" role="checkbox" type="checkbox"><span class="choice-label">Ruby</span></label>\n' + 
+                    '        </div>\n' +
+                    '        <div class="checkbox">\n' +
+                    '            <label>\n' +
+                    '                <input name="entry.673151654" value="Javascript" id="group_673151654_7" role="checkbox" type="checkbox"><span class="choice-label">Javascript</span></label>\n' + 
+                    '        </div>\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for <select>, extract and format the title, the help text, and the select and option tags', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-form-question errorbox-good" role="listitem">' +
+                    '            <div dir="auto" class="ss-item ss-item-required ss-select">' +
+                    '                <div class="ss-form-entry">' +
+                    '                    <label class="ss-q-item-label" for="entry_194574033">' +
+                    '                        <div class="ss-q-title">Choose from a dropdown' +
+                    '                            <label for="itemView.getDomIdToLabel()" aria-label="(Required field)"></label>' +
+                    '                            <span class="ss-required-asterisk" aria-hidden="true">*</span></div>' +
+                    '                        <div class="ss-q-help ss-secondary-text" dir="auto">A list...</div>' +
+                    '                    </label>' +
+                    '                    <select name="entry.194574033" id="entry_194574033" aria-label="Choose from a dropdown A list... " aria-required="true" required="">' +
+                    '                        <option value=""></option>' +
+                    '                        <option value="Linux">Linux</option>' +
+                    '                        <option value="Mac OS X">Mac OS X</option>' +
+                    '                        <option value="Windows">Windows</option>' +
+                    '                        <option value="Minix">Minix</option>' +
+                    '                    </select>' +
+                    '                    <div class="required-message">This is a required question</div>' +
+                    '                </div>' +
+                    '            </div>' +
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div class="form-group">\n' +
+                    '        <label id="label-for-entry_194574033" for="entry_194574033"><span class="form-title">Choose from a dropdown</span><span class="form-required" aria-hidden="true">*</span></label>\n' +
+                    '        <div id="help-for-entry_194574033" class="help-block">A list...</div>\n' +
+                    '        <select aria-describedby="help-for-entry_194574033" aria-labelledby="label-for-entry_194574033" class="form-control" name="entry.194574033" id="entry_194574033" aria-label="Choose from a dropdown A list... " aria-required="true"\n' +
+                    '        required="">\n' +
+                    '            <option value=""></option>\n' +
+                    '            <option value="Linux">Linux</option>\n' +
+                    '            <option value="Mac OS X">Mac OS X</option>\n' +
+                    '            <option value="Windows">Windows</option>\n' +
+                    '            <option value="Minix">Minix</option>\n' +
+                    '        </select>\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for  <input type="hidden">, extract the input tag and its name and value', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <input type="hidden" name="draftResponse" value="[,,&quot;-3445332275682428982&quot;]">' +
+                    '        <input type="hidden" name="pageHistory" value="0">' +
+                    '        <input type="hidden" name="fvv" value="0">' +
+                    '        <input type="hidden" name="fbzx" value="-3445332275682428982">' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <input name="draftResponse" value="[,,&quot;-3445332275682428982&quot;]" type="hidden">\n' +
+                    '    <input name="pageHistory" value="0" type="hidden">\n' +
+                    '    <input name="fvv" value="0" type="hidden">\n' +
+                    '    <input name="fbzx" value="-3445332275682428982" type="hidden">\n' +
+                    '</form>'
+                );
+            });
+
+            it('should, for  <input type="submit">, extract the input tag and its name and value', function () {
+                expect(htmlSources.extractBootstrap3Html(
+                    '<html><body><div>' + 
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST" id="ss-form" target="_self" onsubmit="">' +
+                    '    <ol role="list" class="ss-question-list" style="padding-left: 0">' +
+                    '        <div class="ss-item ss-navigate">' +
+                    '            <table id="navigation-table">' +
+                    '                <tbody>' +
+                    '                    <tr>' +
+                    '                        <td class="ss-form-entry goog-inline-block" id="navigation-buttons" dir="ltr">' +
+                    '                            <input type="submit" name="submit" value="Submit" id="ss-submit" class="jfk-button jfk-button-action ">' +
+                    '                            <div class="ss-password-warning ss-secondary-text">Never submit passwords through Google Forms.</div>' +
+                    '                        </td>' +
+                    '                        <td id="progress-container">' +
+                    '                            <div id="progress-bar" class="jfk-progressBar-nonBlocking progress-bar-horizontal goog-inline-block"></div>' +
+                    '                            <div id="progress-label" class="progress-label">100%: You made it.</div>' +
+                    '                        </td>' +
+                    '                    </tr>' +
+                    '                </tbody>' +
+                    '            </table>' +
+                    '        </div>' +
+                    '    </ol>' +
+                    '</form>' +
+                    '</div></body></html>'
+                )).toEqual(
+                    '<form action="https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/formResponse" method="POST">\n' + 
+                    '    <div class="form-group">\n' +
+                    '        <input class="btn btn-default" name="submit" value="Submit" type="submit">\n' +
+                    '    </div>\n' +
+                    '</form>'
+                );
+            });
+        });
+
         var originalHtmlSources = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"><html><head>' +
         '<link rel="shortcut icon" href="https://ssl.gstatic.com/docs/spreadsheets/forms/favicon_qp2.png" type="image/x-icon">' +
         '<meta http-equiv="Content-type" content="text/html; charset=utf-8">' +

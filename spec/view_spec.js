@@ -16,6 +16,7 @@ define(['view', 'jasmine-jquery'], function (view) {
                 $('#raw-sources').text('<div>raw</div>');
                 $('#bootstrap-output').html('<div>bootstrap</div>');
                 $('#bootstrap-sources').text('<div>bootstrap</div>');
+                $('#error-message').text('Error: error - Root cause: error - jqXHR: {"readyState":4,"status":404,"statusText":"error"}');
             });
 
             it('should remove output of original form', function () {
@@ -53,6 +54,12 @@ define(['view', 'jasmine-jquery'], function (view) {
                 expect($('#bootstrap-sources')).not.toBeEmpty();
                 view.clear();
                 expect($('#bootstrap-sources')).toBeEmpty();
+            });
+
+            it('should remove error message', function () {
+                expect($('#error-message')).not.toBeEmpty();
+                view.clear();
+                expect($('#error-message')).toBeEmpty();
             });
         });
 
@@ -94,6 +101,51 @@ define(['view', 'jasmine-jquery'], function (view) {
                 expect($('#bootstrap-sources')).toBeEmpty();
                 view.render(htmlSources);
                 expect($('#bootstrap-sources').text()).toEqual('<div>bootstrap</div>');
+            });
+        });
+
+        describe('The renderError method', function () {
+            beforeEach(function () {
+                loadFixtures('../../../../index.html');
+            });
+
+            it('should clear the view before rendering the error', function () {
+                // Setup:
+                $('#original-output').attr('src', 'https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform');
+                $('#original-sources').text('<html>original</html>');
+                $('#raw-output').html('<div>raw</div>');
+                $('#raw-sources').text('<div>raw</div>');
+                $('#bootstrap-output').html('<div>bootstrap</div>');
+                $('#bootstrap-sources').text('<div>bootstrap</div>');
+                $('#error-message').text('Error: previous error - Root cause: previous error - jqXHR: {"readyState":4,"status":404,"statusText":"previous error"}');
+
+                // Pre-conditions:
+                expect($('#original-output')).not.toHaveAttr('src', '');
+                expect($('#original-output')).toHaveAttr('src', 'https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform');
+                expect($('#original-sources')).not.toBeEmpty();
+                expect($('#raw-output')).not.toBeEmpty();
+                expect($('#raw-sources')).not.toBeEmpty();
+                expect($('#bootstrap-output')).not.toBeEmpty();
+                expect($('#bootstrap-sources')).not.toBeEmpty();
+                expect($('#error-message')).not.toBeEmpty();
+
+                view.renderError({readyState: 4, status: 404, statusText: 'error'}, 'something bad happened', 'error');
+
+                // Post-conditions:
+                expect($('#original-output')).toHaveAttr('src', '');
+                expect($('#original-sources')).toBeEmpty();
+                expect($('#raw-output')).toBeEmpty();
+                expect($('#raw-sources')).toBeEmpty();
+                expect($('#bootstrap-output')).toBeEmpty();
+                expect($('#bootstrap-sources')).toBeEmpty();
+            });
+
+            it('should render error and related details', function () {
+                expect($('#error-message')).toBeEmpty();
+                expect($('#error-message')).toBeHidden();
+                view.renderError({readyState: 4, status: 404, statusText: 'error'}, 'something bad happened', 'error');
+                expect($('#error-message').text()).toEqual('Error: "something bad happened" - Root cause: "error" - jqXHR: {"readyState":4,"status":404,"statusText":"error"}');
+                expect($('#error-message')).not.toBeHidden();
             });
         });
     });

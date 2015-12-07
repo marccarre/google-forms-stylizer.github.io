@@ -1,4 +1,4 @@
-/*global define*/
+/*global define, console*/
 define(['jquery'], function ($) {
     'use strict';
 
@@ -13,6 +13,8 @@ define(['jquery'], function ($) {
         $('#raw-sources').empty();
         $('#bootstrap-output').empty();
         $('#bootstrap-sources').empty();
+        $('#error-message').empty();
+        $('#error-message').css('display', 'none');
     }
 
     self.render = function (htmlSources) {
@@ -21,6 +23,14 @@ define(['jquery'], function ($) {
         $('#raw-sources').text(htmlSources.rawHtml);
         $('#bootstrap-output').html(htmlSources.bootstrap3Html);
         $('#bootstrap-sources').text(htmlSources.bootstrap3Html);
+    }
+
+    self.renderError = function (jqXHR, textStatus, errorThrown) {
+        self.clear();
+        var message = 'Error: ' + JSON.stringify(textStatus) + ' - Root cause: ' + JSON.stringify(errorThrown) + ' - jqXHR: ' + JSON.stringify(jqXHR);
+        $('#error-message').text(message);
+        $('#error-message').css('display', 'block');
+        console.log(message);
     }
 
     return self;

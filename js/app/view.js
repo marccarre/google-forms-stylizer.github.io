@@ -15,5 +15,13 @@ define(['jquery'], function ($) {
         $('#bootstrap-sources').empty();
     }
 
+    self.render = function (htmlSources) {
+        $('#original-sources').text(htmlSources.sources);
+        $('#raw-output').html(htmlSources.rawHtml);
+        $('#raw-sources').text(htmlSources.rawHtml);
+        $('#bootstrap-output').html(htmlSources.bootstrap3Html);
+        $('#bootstrap-sources').text(htmlSources.bootstrap3Html);
+    }
+
     return self;
 });

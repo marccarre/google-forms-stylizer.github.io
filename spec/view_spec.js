@@ -55,5 +55,46 @@ define(['view', 'jasmine-jquery'], function (view) {
                 expect($('#bootstrap-sources')).toBeEmpty();
             });
         });
+
+        describe('The render method', function () {
+            var htmlSources = {
+                sources       : '<html>original</html>',
+                rawHtml       : '<div>raw</div>',
+                bootstrap3Html: '<div>bootstrap</div>'
+            }
+            beforeEach(function () {
+                loadFixtures('../../../../index.html');
+            });
+
+            it('should render sources of original form', function () {
+                expect($('#original-sources')).toBeEmpty();
+                view.render(htmlSources);
+                expect($('#original-sources').text()).toEqual('<html>original</html>');
+            });
+
+            it('should render output of raw form', function () {
+                expect($('#raw-output')).toBeEmpty();
+                view.render(htmlSources);
+                expect($('#raw-output').html()).toEqual('<div>raw</div>');
+            });
+
+            it('should render sources of raw form', function () {
+                expect($('#raw-sources')).toBeEmpty();
+                view.render(htmlSources);
+                expect($('#raw-sources').text()).toEqual('<div>raw</div>');
+            });
+
+            it('should render output of Bootstrap form', function () {
+                expect($('#bootstrap-output')).toBeEmpty();
+                view.render(htmlSources);
+                expect($('#bootstrap-output').html()).toEqual('<div>bootstrap</div>');
+            });
+
+            it('should render sources of Bootstrap form', function () {
+                expect($('#bootstrap-sources')).toBeEmpty();
+                view.render(htmlSources);
+                expect($('#bootstrap-sources').text()).toEqual('<div>bootstrap</div>');
+            });
+        });
     });
 });

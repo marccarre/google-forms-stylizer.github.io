@@ -6,10 +6,10 @@ require.config({
         'beautify':      'lib/beautify-v1.5.10/beautify',
         'beautify-css':  'lib/beautify-v1.5.10/beautify-css',
         'beautify-html': 'lib/beautify-v1.5.10/beautify-html',
-        'ui':            'app/ui',
         'model':         'app/model',
-        'utilities':     'app/utilities',
-        'view':          'app/view'
+        'view':          'app/view',
+        'controller':    'app/controller',
+        'utilities':     'app/utilities'
     },
     shim: {
         'bootstrap': { 
@@ -21,4 +21,4 @@ require.config({
 
 console.log('Loaded: main.js');
 // Call the application's main module:
-require(['ui']);
+require(['controller']);

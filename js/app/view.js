@@ -25,9 +25,15 @@ define(['jquery'], function ($) {
         $('#bootstrap-sources').text(htmlSources.bootstrap3Html);
     }
 
-    self.renderError = function (jqXHR, textStatus, errorThrown) {
+    self.renderError = function (textStatus, errorThrown, jqXHR) {
         self.clear();
-        var message = 'Error: ' + JSON.stringify(textStatus) + ' - Root cause: ' + JSON.stringify(errorThrown) + ' - jqXHR: ' + JSON.stringify(jqXHR);
+        var message = 'Error: ' + JSON.stringify(textStatus);
+        if (errorThrown !== undefined) {
+            message = message + ' - Root cause: ' + JSON.stringify(errorThrown);
+        }
+        if (jqXHR !== undefined) {
+            message = message + ' - jqXHR: ' + JSON.stringify(jqXHR);
+        }
         $('#error-message').text(message);
         $('#error-message').css('display', 'block');
         console.log(message);

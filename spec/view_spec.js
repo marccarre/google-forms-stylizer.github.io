@@ -129,7 +129,7 @@ define(['view', 'jasmine-jquery'], function (view) {
                 expect($('#bootstrap-sources')).not.toBeEmpty();
                 expect($('#error-message')).not.toBeEmpty();
 
-                view.renderError({readyState: 4, status: 404, statusText: 'error'}, 'something bad happened', 'error');
+                view.renderError('something bad happened', 'error', {readyState: 4, status: 404, statusText: 'error'});
 
                 // Post-conditions:
                 expect($('#original-output')).toHaveAttr('src', '');
@@ -140,11 +140,27 @@ define(['view', 'jasmine-jquery'], function (view) {
                 expect($('#bootstrap-sources')).toBeEmpty();
             });
 
-            it('should render error and related details', function () {
+            it('should render error message, root cause, and jqXHR object', function () {
                 expect($('#error-message')).toBeEmpty();
                 expect($('#error-message')).toBeHidden();
-                view.renderError({readyState: 4, status: 404, statusText: 'error'}, 'something bad happened', 'error');
+                view.renderError('something bad happened', 'error', {readyState: 4, status: 404, statusText: 'error'});
                 expect($('#error-message').text()).toEqual('Error: "something bad happened" - Root cause: "error" - jqXHR: {"readyState":4,"status":404,"statusText":"error"}');
+                expect($('#error-message')).not.toBeHidden();
+            });
+
+            it('should render error message and root cause only (jqXHR object is optional)', function () {
+                expect($('#error-message')).toBeEmpty();
+                expect($('#error-message')).toBeHidden();
+                view.renderError('something bad happened', 'error');
+                expect($('#error-message').text()).toEqual('Error: "something bad happened" - Root cause: "error"');
+                expect($('#error-message')).not.toBeHidden();
+            });
+
+            it('should render error message only (root cause and jqXHR object are optional)', function () {
+                expect($('#error-message')).toBeEmpty();
+                expect($('#error-message')).toBeHidden();
+                view.renderError('something bad happened');
+                expect($('#error-message').text()).toEqual('Error: "something bad happened"');
                 expect($('#error-message')).not.toBeHidden();
             });
         });

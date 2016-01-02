@@ -8,6 +8,10 @@ define(['utilities'], function (utils) {
                 expect(utils.isValidUrl('https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform')).toBe(true);
             });
 
+            it('should accept https://docs.google.com/forms/d/1Z69tnhJNRl_8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform', function () {
+                expect(utils.isValidUrl('https://docs.google.com/forms/d/1Z69tnhJNRl_8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform')).toBe(true);
+            });
+
             it('should accept http://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform', function () {
                 expect(utils.isValidUrl('https://docs.google.com/forms/d/1Z69tnhJNRl-8hFlTteWlzCVJHyNWz4Q9tTQAHlL5aEA/viewform')).toBe(true);
             });
